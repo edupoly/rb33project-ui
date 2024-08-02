@@ -7,6 +7,7 @@ function AgentDashboard() {
     <div>
         <h1>AgentDashboard</h1>
         <Link to="/agent/addLoan">Add Loan</Link>
+        
         <Outlet></Outlet>
     </div>
   )

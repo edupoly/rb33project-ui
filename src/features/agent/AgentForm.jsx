@@ -1,12 +1,13 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import { useAddLoanMutation, useGetAllLoanTypesQuery } from '../../services/loansApi'
+import { useAddLoanMutation, useAddUserMutation, useGetAllLoanTypesQuery } from '../../services/loansApi'
 import { useGetAllIntrestratesQuery } from '../../services/interestsApi'
 
 function AgentForm() {
   var {isLoading:isLoantypeLoading,data:loantypes}=useGetAllLoanTypesQuery()
    var {isLoading:isInterestRatesLoading,data:interestRates} = useGetAllIntrestratesQuery()
    var [addLoanFn] = useAddLoanMutation()
+   var [addUserFn] = useAddUserMutation()
   var loanForm=useFormik({
     initialValues:{
       "customerMobile":"",
@@ -26,6 +27,12 @@ function AgentForm() {
     onSubmit:(values)=>{
       values.intrest=JSON.parse(values.intrest)
       addLoanFn(values).then((res)=>{console.log(res)}).catch((err)=>{console.error(err)})
+      addUserFn({
+        "username": values.email,
+        "password": 123,
+        "role": "customer",
+        "mobile": values.customerMobile
+      })
     }
   })
    

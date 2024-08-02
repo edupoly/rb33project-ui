@@ -16,6 +16,9 @@ import CustomerDashboard from './features/customer/CustomerDashboard';
 import AgentDashboard from './features/agent/AgentDashboard';
 import AgentForm from './features/agent/AgentForm';
 import ManagerHome from './features/manager/ManagerHome';
+import AgentHome from './features/agent/AgentHome';
+import AgentDownpaymentForm from './features/agent/AgentDownpaymentForm';
+import CustomerHome from './features/customer/CustomerHome';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,15 +37,29 @@ const router = createBrowserRouter([
       },
       {
         path:"/customer",
-        element:<CustomerDashboard></CustomerDashboard>
+        element:<CustomerDashboard></CustomerDashboard>,
+        children:[
+          {
+            path:"/customer/",
+            element:<CustomerHome></CustomerHome>
+          }
+        ]
       },
       {
         path:"/agent",
         element:<AgentDashboard></AgentDashboard>,
         children:[
           {
+            path:"/agent/",
+            element:<AgentHome></AgentHome>
+          },
+          {
             path:"/agent/addLoan",
             element:<AgentForm></AgentForm>
+          },
+          {
+            path:"/agent/downpaymentForm",
+            element:<AgentDownpaymentForm></AgentDownpaymentForm>
           }
         ]
       },
